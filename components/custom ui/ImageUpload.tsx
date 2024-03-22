@@ -7,11 +7,11 @@ import { Button } from '../ui/button'
 interface ImageUploadProps {
   value: string[]
   onChange: (value: string) => void
-  onRemove: () => void
+  onRemove: (value: string) => void
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, onRemove, value }) => {
-  const onSuccess = (result: CloudinaryUploadWidgetResults) => {
+  const onUpload = (result: CloudinaryUploadWidgetResults) => {
     onChange((result.info as CloudinaryUploadWidgetInfo).secure_url)
   }
 
@@ -21,7 +21,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, onRemove, value }) 
         {value.map((url) => (
           <div key={url} className="relative w-[200px] h-[200px]">
             <div className="absolute top-0 right-0 z-10">
-              <Button type="button" onClick={onRemove} size="sm" className="bg-red-1 text-white">
+              <Button type="button" onClick={() => onRemove(url)} size="sm" className="bg-red-1 text-white">
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
@@ -30,7 +30,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, onRemove, value }) 
         ))}
       </div>
 
-      <CldUploadWidget uploadPreset="mqb2xfqd" onSuccess={onSuccess}>
+    <CldUploadWidget uploadPreset="mqb2xfqd" onUpload={onUpload}>
         {({ open }) => {
           return (
             <Button type="button" onClick={() => open()} className="bg-grey-1 text-white">

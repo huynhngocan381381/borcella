@@ -4,6 +4,7 @@ import { Command, CommandGroup, CommandInput, CommandItem } from '@/components/u
 import { X } from 'lucide-react'
 import { useState } from 'react'
 import { Badge } from '../ui/badge'
+import { CommandList } from 'cmdk'
 
 interface MultiSelectProps {
   placeholder: string
@@ -33,7 +34,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ placeholder, collections, val
         {selected.map((collection) => (
           <Badge key={collection._id}>
             {collection.title}
-            <div className="ml-1 hover:text-red-1" onClick={() => onRemove(collection._id)}>
+            <div className="ml-1 hover:text-red-1 cursor-pointer" onClick={() => onRemove(collection._id)}>
               <X className="h-3 w-3" />
             </div>
           </Badge>
@@ -50,21 +51,23 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ placeholder, collections, val
 
       <div className="relative mt-2">
         {open && (
-          <CommandGroup className="absolute w-full z-30 top-0 overflow-auto border rounded-md shadow-md">
-            {selectables.map((collection) => (
-              <CommandItem
-                key={collection._id}
-                onMouseDown={(e) => e.preventDefault()}
-                onSelect={() => {
-                  onChange(collection._id)
-                  setInputValue('')
-                }}
-                className="hover:bg-grey-2 cursor-pointer"
-              >
-                {collection.title}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandGroup className="absolute w-full z-30 top-0 overflow-auto border rounded-md shadow-md">
+              {selectables.map((collection) => (
+                <CommandItem
+                  key={collection._id}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onSelect={() => {
+                    onChange(collection._id)
+                    setInputValue('')
+                  }}
+                  className="hover:bg-grey-2 cursor-pointer"
+                >
+                  {collection.title}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         )}
       </div>
     </Command>

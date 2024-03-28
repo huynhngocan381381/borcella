@@ -17,14 +17,7 @@ export const GET = async (req: NextRequest, { params }: { params: { productId: s
     if (!product) {
       return new NextResponse(JSON.stringify({ message: 'Product not found' }), { status: 404 })
     }
-    return new NextResponse(JSON.stringify(product), {
-      status: 200,
-      headers: {
-        'Access-Control-Allow-Origin': `${process.env.ECOMMERCE_STORE_URL}`,
-        'Access-Control-Allow-Methods': 'GET',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    })
+    return new NextResponse(JSON.stringify(product), { status: 200 })
   } catch (err) {
     console.log('[productId_GET]', err)
     return new NextResponse('Internal error', { status: 500 })
@@ -98,7 +91,7 @@ export const POST = async (req: NextRequest, { params }: { params: { productId: 
 
     await updatedProduct.save()
 
-    return NextResponse.json(updatedProduct, { status: 200 })
+    return new NextResponse(JSON.stringify(updatedProduct), { status: 200 })
   } catch (err) {
     console.log('[productId_POST]', err)
     return new NextResponse('Internal error', { status: 500 })
@@ -141,4 +134,3 @@ export const DELETE = async (req: NextRequest, { params }: { params: { productId
   }
 }
 
-export const dynamic = 'force-dynamic'

@@ -52,7 +52,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
     } catch (err) {
       console.log('[collections_GET]', err)
       toast.error('Something went wrong! Please try again.')
-    }
+    } 
   }
 
   useEffect(() => {
@@ -223,7 +223,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                 </FormItem>
               )}
             />
-            {collections.length > 0 && (
+            {collections && collections.length > 0 && (
               <FormField
                 control={form.control}
                 name="collections"

@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { Trash } from 'lucide-react'
+import { useState } from 'react'
 
 import {
   AlertDialog,
@@ -14,7 +14,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Button } from '../ui/button'
 import toast from 'react-hot-toast'
 
 interface DeleteProps {
@@ -46,9 +45,9 @@ const Delete: React.FC<DeleteProps> = ({ item, id }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button className="bg-red-1 text-white">
+        <div className="flex items-center justify-center rounded-md bg-red-1 text-white w-10 h-8">
           <Trash className="h-4 w-4" />
-        </Button>
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-white text-grey-1">
         <AlertDialogHeader>

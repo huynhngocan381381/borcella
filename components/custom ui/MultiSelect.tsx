@@ -29,7 +29,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ placeholder, collections, val
   const selectables = collections.filter((collection) => !selected.includes(collection))
 
   return (
-    <Command className="overflow-visible bg-white">
+    <Command className="overflow-visible">
       <div className="flex gap-1 flex-wrap border rounded-md">
         {selected.map((collection) => (
           <Badge key={collection._id}>
@@ -50,9 +50,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ placeholder, collections, val
       </div>
 
       <div className="relative mt-2">
-        {open && (
+        {open && selectables.length > 0 && (
           <CommandList>
-            <CommandGroup className="absolute w-full z-30 top-0 overflow-auto border rounded-md shadow-md">
+            <CommandGroup className="absolute w-full z-30 top-0 overflow-auto border rounded-md shadow-md bg-white">
               {selectables.map((collection) => (
                 <CommandItem
                   key={collection._id}
